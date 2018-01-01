@@ -15,3 +15,21 @@ This plugin lists running processes with PID and Parent PID, Command Line used t
 *recommended use*
 
 `python vol.py --plugins={path/to/plugins} --profile={profile for memory image} -f {path to image} ramscan --output=html --output-file=ramscan.html`
+
+### Example output
+
+```
+Name           PID  Parent Command Line   VAD               
+System            4      0                                   
+smss.exe        504      4 \SystemRoot\temp\smss.exe
+conhost.exe    6248    748 \??\C:\WINDOWS\system32\conhost.exe "9131723291973856416-156581232056986786412445124951738786652-244451647283318875 Suspicious RWX VAD
+scPopup.exe    6284   4616 "C:\Program Files\Xerox\scPopup.exe" /s /k /t /g Suspicious RWX VAD
+GROOVE.EXE     6384   4616 "C:\Program Files\Microsoft Office 15\root\office15\GROOVE.EXE" /RunFolderSync /TrayOnly  Suspicious RWX VAD
+mobsync.exe    6672    936 C:\WINDOWS\System32\mobsync.exe -Embedding Suspicious RWX VAD
+ucmapi.exe     5748    936 "C:\Program Files\Microsoft Office 15\Root\Office15\UcMapi.exe" -Embedding Suspicious RWX VAD
+powershell.exe 5772   6188 powershell -nop -exec bypass -EncodedCommand SQBFAFgAIAAoACgAbgBlAHcALQBvAGIA...ACcAaAB0AHQAcAA6AC8ALwAxADIANwAuADAALgAwAC4AMQA6ADUAMgA4ADAAOAAvACcAKQApAA== Suspicious RWX VAD
+```
+### IR Use
+* Look for command execution from unusual locations
+* Look for suspicious command execution: Eg encoded Powershell
+* Look for memory sections which allow read-write-execute
