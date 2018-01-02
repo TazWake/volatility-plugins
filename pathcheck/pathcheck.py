@@ -40,6 +40,7 @@ class PathCheck(common.AbstractWindowsCommand):
             response = ""
             temp = "temp"
             user = "user"
+            dl ="download"
             imgPath = str(task.Peb.ProcessParameters.ImagePathName)
             if temp.lower() in imgPath.lower():
                 response = "Possible Temp location"
@@ -51,6 +52,14 @@ class PathCheck(common.AbstractWindowsCommand):
                        ])
             if user.lower() in imgPath.lower():
                 response = "Possible User location"
+                yield (0, [
+                           str(task.UniqueProcessId),
+                           str(task.ImageFileName),
+                           str(response),
+                           str(imgPath),
+                       ])
+            if dl.lower() in imgPath.lower():
+                response = "Possible Download location"
                 yield (0, [
                            str(task.UniqueProcessId),
                            str(task.ImageFileName),
