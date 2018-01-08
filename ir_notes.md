@@ -4,4 +4,6 @@
 Looking for classic windows functions used by keyloggers - use strings & grep on dumped process files (such as Malfind output)
 
 
-```strings {object} | grep -i -E "GetAsyncnKeyState|SetWindowsHookEx|WH_KEYBOARD|WH_KEYBOARD_LL|GetKeyboardStat```
+```strings {object} | grep -i -E "GetAsyncnKeyState|SetWindowsHookEx|WH_KEYBOARD|WH_KEYBOARD_LL|GetKeyboardStat"```
+
+
