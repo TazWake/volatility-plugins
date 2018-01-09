@@ -10,7 +10,8 @@ The plugin highlights the following events:
 
 ## How to use triagecheck
 1. Download the file to a local plugin store.
-2. Invoke volatility calling the plugin.
+2. Invoke volatility calling the plugin. Eg `python vol.py --plugins={path/to/plugins} --profile={profile for memory image} -f {path to image} triagecheck`
+3. Where the plugin generates a warning message, prioritise this for further investigation
 
 ## DFIR Notes
 This tool is a high level triage for some obvious attacks. It is ideally used if you are trying to triage multiple systems or believe there is a risk that malware may be impersonating legitimate critical processes.
