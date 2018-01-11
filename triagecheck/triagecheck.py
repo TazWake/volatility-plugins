@@ -118,11 +118,9 @@ class TriageCheck(common.AbstractWindowsCommand):
 
             # Check for oddly short file length executables - eg. a.exe
             #
-            # exename, extension = procname.split('.') # split off the first portion
-            # if len(exename) < 3:
-            #    response = "Unusually short filename"
-            #
-            
+            exename, extension = procname.split('.') # split off the first portion
+            if len(exename) < 3:
+                response = "Unusually short filename"
                     
             # output in "Unified Output format"
             yield (0, [
