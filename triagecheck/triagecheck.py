@@ -90,6 +90,12 @@ class TriageCheck(common.AbstractWindowsCommand):
             if procname.lower() == check:
                 # possible impersonation
                 response = "Posible impersonation of SERVICES.EXE"
+                
+            # Check for DLLHOST impersonation
+            check = ["dllh0st.exe","dllhot.exe","d1lhost.exe","dl1host.exe","d11host.exe","d11h0st.exe"]
+            if procname.lower() == check:
+                # possible impersonation
+                response = "Posible impersonation of DLLHOST.EXE"
 
             # Check for multiple lsass, eg Stuxnet :-)
             check = "lsass.exe"
@@ -108,8 +114,16 @@ class TriageCheck(common.AbstractWindowsCommand):
                     holder = "valid"
                 else:
                     # invalid path
-                    response = "Lsass.exe running from unusual location"
+                    response = "lsass.exe running from unusual location"
 
+            # Check for oddly short file length executables - eg. a.exe
+            #
+            # exename, extension = procname.split('.') # split off the first portion
+            # if len(exename) < 3:
+            #    response = "Unusually short filename"
+            #
+            
+                    
             # output in "Unified Output format"
             yield (0, [
                       int(pid),
@@ -120,7 +134,7 @@ class TriageCheck(common.AbstractWindowsCommand):
 
 
     def unified_output(self,data):
-    	tree = [
+        tree = [
                 ("PID",int),
                 ("Filename",str),
                 ("Triage Response",str),
