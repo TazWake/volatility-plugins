@@ -7,6 +7,9 @@ The plugin highlights the following events:
 + SERVICES - this should be running from system32
 + SVCHOST - check for impersonation (e.g. scvhost / svch0st etc)
 + LSASS - there should only be one instance and it should be running from system32
++ DLLHOST - check for impersonataion (e.g. dl1host.exe)
++ SHORT FILE NAMES - look for 1 or 2 character file names (e.g. a.exe)
++ UNUSUAL EXTENSIONS - look for non exe files running in memory (e.g. c99shell.php)
 
 ## How to use triagecheck
 1. Download the file to a local plugin store.
