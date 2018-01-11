@@ -124,7 +124,7 @@ class TriageCheck(common.AbstractWindowsCommand):
                 
             # Check the extension
             if extension != "exe":
-                if procname == ["System","system"]:
+                if procname.lower() == "system": ## or if procname in ["System","system","SYSTEM"]
                     # Not suspcious
                     holder = "Valid"          
                 else: 
