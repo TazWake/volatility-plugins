@@ -121,6 +121,15 @@ class TriageCheck(common.AbstractWindowsCommand):
             exename, extension = procname.split('.') # split off the first portion
             if len(exename) < 3:
                 response = "Unusually short filename"
+                
+            # Check the extension
+            if extension != "exe":
+                if procname == ["System","system"]:
+                    # Not suspcious
+                    holder = "Valid"          
+                else: 
+                    # possibly suspicious
+                    response = "Possibly suspicious extension"
                     
             # output in "Unified Output format"
             yield (0, [
