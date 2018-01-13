@@ -131,18 +131,17 @@ class TriageCheck(common.AbstractWindowsCommand):
                 holder = "valid"
                 # Bypass other checks here.                   
             else:
-                exename, extension = procname.split('.') # split off the first portion
-                if len(exename) < 3:
-                    response = "Unusually short filename"
-                
-                # Check the extension
-                if extension != "exe":
-                    if procname.lower() == "system": ## or if procname in ["System","system","SYSTEM"]
-                        # Not suspcious
-                        holder = "Valid"          
-                    else: 
-                        # possibly suspicious
-                        response = "Possibly suspicious extension"
+                # check for data collection issues where procname doesn't contain full file name
+                if "." not in procname:
+                    holder = "bypass"
+                    # Bypass other checks here.
+                    exename, extension = procname.split('.') # split off the first portion
+                    if len(exename) < 3:
+                        response = "Unusually short filename"
+                    # Check the extension
+                    if extension != "exe":
+                            # possibly suspicious
+                            response = "Possibly suspicious extension"
                     
             # output in "Unified Output format"
             yield (0, [
