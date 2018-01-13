@@ -54,8 +54,7 @@ class TriageCheck(common.AbstractWindowsCommand):
             holder = ""
             procname = str(task.ImageFileName)
             pid = int(task.UniqueProcessId)
-            imgpath = str(task.Peb.ProcessParameters.ImagePathName)
-
+            
             # Check csrss for known attacks 
             # Should only be 1 instance of csrss, running from system32
             check = "csrss.exe"
@@ -67,7 +66,7 @@ class TriageCheck(common.AbstractWindowsCommand):
                     # multiple csrss found
                     response = "Multiple instances of CSRSS found"
                 # Check location
-                #imgpath = str(task.Peb.ProcessParameters.ImagePathName)
+                imgpath = str(task.Peb.ProcessParameters.ImagePathName)
                 path = str("\system32\csrss.exe")
                 if path in imgpath.lower():
                    # valid path
@@ -87,6 +86,7 @@ class TriageCheck(common.AbstractWindowsCommand):
             check = "services.exe"
             if procname.lower() == check:
                 path = "system32\services.exe"
+                imgpath = str(task.Peb.ProcessParameters.ImagePathName)
                 if path in imgpath.lower():
                     # valid path
                     holder = "valid"
@@ -150,8 +150,6 @@ class TriageCheck(common.AbstractWindowsCommand):
                       str(procname),
                       str(response),
                       ])
-
-
 
     def unified_output(self,data):
         tree = [
