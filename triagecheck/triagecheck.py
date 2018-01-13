@@ -57,7 +57,7 @@ class TriageCheck(common.AbstractWindowsCommand):
         csrsscount = 0
         lsasscount = 0
         for task in data:
-            response = "No obvious issues"
+            response = "No indicators at this time"
             holder = ""
             procname = str(task.ImageFileName)
             pid = int(task.UniqueProcessId)
@@ -77,7 +77,7 @@ class TriageCheck(common.AbstractWindowsCommand):
                 path = str("\system32\csrss.exe")
                 if path in imgpath.lower():
                    # valid path
-                   holder = "valid"
+                   holder = "bypass"
                 else:
         	    # invalid path
                     response = "CSRSS launched from invalid path"                
@@ -92,11 +92,11 @@ class TriageCheck(common.AbstractWindowsCommand):
             # Check services.exe is running from system32
             check = "services.exe"
             if procname.lower() == check:
-                path = "system32\services.exe"
+                path = "\system32\services.exe"
                 imgpath = str(task.Peb.ProcessParameters.ImagePathName)
                 if path in imgpath.lower():
                     # valid path
-                    holder = "valid"
+                    holder = "bypass"
                 else:
                     # invalid path
                     response = "Services.exe running from unusual location"
@@ -127,7 +127,7 @@ class TriageCheck(common.AbstractWindowsCommand):
                 path = str("\system32\lsass.exe")
                 if path in imgpath.lower():
                     # valid path
-                    holder = "valid"
+                    holder = "bypass"
                 else:
                     # invalid path
                     response = "lsass.exe running from unusual location"
@@ -135,7 +135,7 @@ class TriageCheck(common.AbstractWindowsCommand):
             # Check for oddly short file length executables - eg. a.exe
             # first account for system
             if procname.lower() == "system":
-                holder = "valid"
+                holder = "bypass"
                 # Bypass other checks here.                   
             else:
                 # check for data collection issues where procname doesn't contain full file name
@@ -148,8 +148,8 @@ class TriageCheck(common.AbstractWindowsCommand):
                         response = "Unusually short filename"
                     # Check the extension
                     if extension != "exe":
-                            # possibly suspicious
-                            response = "Possibly suspicious extension"
+                        # possibly suspicious
+                        response = "Possibly suspicious extension"
                     
             # output in "Unified Output format"
             yield (0, [
