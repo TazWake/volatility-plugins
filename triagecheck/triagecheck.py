@@ -1,16 +1,23 @@
 # Triage Check
 #
-# This plugin looks at some obvious signs of malicious activity and tries to highlight them. 
-# The idea is to give a very quick assessment for malice. 
+# This plugin looks at some obvious signs of malicious activity and tries to highlight them.  
 # 
 # ############################
 # #### NOTE - LIMITATIONS ####
 # ############################
 #
-# This is not an indepth tool which checks for hollowing, injection etc. It makes lots of assumptions. It uses pslist.
-# Malware can evade this scan. This checks for LOW HANGING FRUIT. Do not think a clean scan with this plugin means the 
+# This is not an indepth tool which checks for hollowing, injection etc. 
+# It makes lots of assumptions. It uses pslist.
+# Malware can evade this scan. This checks for LOW HANGING FRUIT. 
+# Do not think a clean scan with this plugin means the 
 # system is free from tampering.
-# This plugin WILL, however, find some common characteristics of attacker behaviour. Use it as PART of your arsenal.
+# This plugin WILL, however, find some common characteristics 
+# of attacker behaviour. Use it as PART of your arsenal.
+#
+# ############################
+# ############################
+# ############################
+#
 #
 # Authors:
 # Taz Wake (t.wake@halkynconsulting.co.uk)
@@ -38,7 +45,7 @@ import volatility.plugins.common as common
 from volatility.renderers import TreeGrid
 
 class TriageCheck(common.AbstractWindowsCommand):
-    '''Checks for obvious signs of malice'''
+    '''Checks for OBVIOUS signs of tampering'''
 
     def calculate(self):
         addr_space = utils.load_as(self._config)
