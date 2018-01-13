@@ -135,6 +135,7 @@ class TriageCheck(common.AbstractWindowsCommand):
                 if "." not in procname:
                     holder = "bypass"
                     # Bypass other checks here.
+                else:
                     exename, extension = procname.split('.') # split off the first portion
                     if len(exename) < 3:
                         response = "Unusually short filename"
