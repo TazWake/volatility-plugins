@@ -126,18 +126,23 @@ class TriageCheck(common.AbstractWindowsCommand):
                     response = "lsass.exe running from unusual location"
 
             # Check for oddly short file length executables - eg. a.exe
-            exename, extension = procname.split('.') # split off the first portion
-            if len(exename) < 3:
-                response = "Unusually short filename"
+            # first account for system
+            if procname.lower() == "system":
+                holder = "valid"
+                # Bypass other checks here.                   
+            else:
+                exename, extension = procname.split('.') # split off the first portion
+                if len(exename) < 3:
+                    response = "Unusually short filename"
                 
-            # Check the extension
-            if extension != "exe":
-                if procname.lower() == "system": ## or if procname in ["System","system","SYSTEM"]
-                    # Not suspcious
-                    holder = "Valid"          
-                else: 
-                    # possibly suspicious
-                    response = "Possibly suspicious extension"
+                # Check the extension
+                if extension != "exe":
+                    if procname.lower() == "system": ## or if procname in ["System","system","SYSTEM"]
+                        # Not suspcious
+                        holder = "Valid"          
+                    else: 
+                        # possibly suspicious
+                        response = "Possibly suspicious extension"
                     
             # output in "Unified Output format"
             yield (0, [
