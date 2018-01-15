@@ -44,7 +44,11 @@ class PathCheck(common.AbstractWindowsCommand):
             tmp = "tmp"
             user = "user"
             dl ="download"
-            imgPath = str(task.Peb.ProcessParameters.ImagePathName)
+            if task.Peb:
+                imgPath = str(task.Peb.ProcessParameters.ImagePathName)
+            else:
+                imgPath = ""
+                
             if temp in imgPath.lower():
                 response = "Possible Temp location"
                 yield (0, [
