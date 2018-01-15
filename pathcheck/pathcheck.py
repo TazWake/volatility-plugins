@@ -1,4 +1,6 @@
 # Path Check
+# A basic triage tool to check if any processes are running from unusual
+# or suspicious locations such as TEMP folders.
 #
 # Authors:
 # Taz Wake (t.wake@halkynconsulting.co.uk)
@@ -39,10 +41,11 @@ class PathCheck(common.AbstractWindowsCommand):
         for task in data:
             response = ""
             temp = "temp"
+            tmp = "tmp"
             user = "user"
             dl ="download"
             imgPath = str(task.Peb.ProcessParameters.ImagePathName)
-            if temp.lower() in imgPath.lower():
+            if temp in imgPath.lower():
                 response = "Possible Temp location"
                 yield (0, [
                            str(task.UniqueProcessId),
@@ -50,7 +53,15 @@ class PathCheck(common.AbstractWindowsCommand):
                            str(response),
                            str(imgPath),
                        ])
-            if user.lower() in imgPath.lower():
+            if tmp in imgPath.lower():
+                response = "Possible Temp location"
+                yield (0, [
+                           str(task.UniqueProcessId),
+                           str(task.ImageFileName),
+                           str(response),
+                           str(imgPath),
+                       ])
+            if user in imgPath.lower():
                 response = "Possible User location"
                 yield (0, [
                            str(task.UniqueProcessId),
@@ -58,7 +69,7 @@ class PathCheck(common.AbstractWindowsCommand):
                            str(response),
                            str(imgPath),
                        ])
-            if dl.lower() in imgPath.lower():
+            if dl in imgPath.lower():
                 response = "Possible Download location"
                 yield (0, [
                            str(task.UniqueProcessId),
