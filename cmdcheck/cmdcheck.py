@@ -56,7 +56,11 @@ class CmdCheck(common.AbstractWindowsCommand):
                 stderror = hex(proc.Peb.ProcessParameters.StandardError)
                 if stderror != "0xbL":
                     stderror = stderror + "!*!"
-
+            else:
+                stdinp = "-"
+                stdoutp = "-"
+                stderror = "-"
+                
             yield (0, [
                 str(proc.ImageFileName),
                 str(pid),
