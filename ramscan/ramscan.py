@@ -1,4 +1,5 @@
-# Volatility
+# RAMSCAN
+# A slightly faster version of MALFIND which checks command lines and VAD blocks
 #
 # Authors:
 # Taz Wake (t.wake@halkynconsulting.co.uk)
