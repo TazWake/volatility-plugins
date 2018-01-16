@@ -113,19 +113,18 @@ class TriageCheck(common.AbstractWindowsCommand):
                 # possible impersonation
                 response = "Posible impersonation of DLLHOST.EXE"
 
+            # Scan for LSASS oddities
             # Check for multiple lsass, eg Stuxnet :-)
             check = "lsass.exe"
             if procname == check:
                 lsasscount = lsasscount+1
-                # Check number of instances
-                if lsasscount > 1:
-                    # multiple csrss found
-                    response = "Multiple instances of LSASS found"
-
-            # Check lsass is running from system32
-            if procname == check:
                 path = str("\system32\lsass.exe")
                 imgpath = str(task.Peb.ProcessParameters.ImagePathName)
+                # Check number of instances
+                if lsasscount > 1:
+                    # multiple lsass found
+                    response = "Multiple instances of LSASS found"
+                # Check lsass is running from system32
                 if path in imgpath.lower():
                     # valid path
                     holder = "bypass"
