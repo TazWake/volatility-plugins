@@ -1,8 +1,6 @@
 # Volatility-Plugins - Learning area
 I am in the process of learning how to create volatility plugins. This repo will be used as a storage platform for them.
 
-In the event that anything of actual value is created (rather than just a rework of existing ones as I try to understand the commands) it will be migrated to a new location.
-
 The majority of ideas will come from [The Art of Memory Forensics](https://www.wiley.com/en-us/The+Art+of+Memory+Forensics%3A+Detecting+Malware+and+Threats+in+Windows%2C+Linux%2C+and+Mac+Memory-p-9781118825099), which is possibly the best single source of knowledge on this topic.
 
 ## RAMSCAN
