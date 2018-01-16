@@ -2,9 +2,9 @@
 #
 # This plugin looks at some obvious signs of malicious activity and tries to highlight them.  
 # 
-# ############################
-# #### NOTE - LIMITATIONS ####
-# ############################
+# #############################
+# #### !!! LIMITATIONS !!! ####
+# #############################
 #
 # This is not an indepth tool which checks for hollowing, injection etc. 
 # It makes lots of assumptions. It uses pslist.
