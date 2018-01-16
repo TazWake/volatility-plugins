@@ -100,19 +100,24 @@ class TriageCheck(common.AbstractWindowsCommand):
                 else:
                     # invalid path
                     response = "Services.exe running from unusual location"
-    
+                    
+            # Check for impersonation
             # Check for SVCHost impersonation
             check = ["scvhost.exe","svch0st.exe","sscvhost.exe","svcchost.exe","scvh0st.exe","svchozt.exe","svchot.exe","scvhot.exe"]
             if procname.lower() == check:
                 # possible impersonation
-                response = "Posible impersonation of SERVICES.EXE"
-                
+                response = "Posible impersonation of SVCHOST.EXE"
             # Check for DLLHOST impersonation
             check = ["dllh0st.exe","dllhot.exe","d1lhost.exe","dl1host.exe","d11host.exe","d11h0st.exe"]
             if procname.lower() == check:
                 # possible impersonation
                 response = "Posible impersonation of DLLHOST.EXE"
-
+            # Check for LSASS impersonation
+            check = ["lsas.exe","lssas.exe","ls4ss.exe","lsasss.exe","lssass.exe","lsaas.exe"]
+            if procname.lower() == check:
+                # possible impersonation
+                response = "Posible impersonation of LSASS.EXE"
+                
             # Scan for LSASS oddities
             # Check for multiple lsass, eg Stuxnet :-)
             check = "lsass.exe"
