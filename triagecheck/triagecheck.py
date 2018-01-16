@@ -125,6 +125,7 @@ class TriageCheck(common.AbstractWindowsCommand):
             # Check lsass is running from system32
             if procname == check:
                 path = str("\system32\lsass.exe")
+                imgpath = str(task.Peb.ProcessParameters.ImagePathName)
                 if path in imgpath.lower():
                     # valid path
                     holder = "bypass"
