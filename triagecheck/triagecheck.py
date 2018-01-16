@@ -147,7 +147,7 @@ class TriageCheck(common.AbstractWindowsCommand):
                     if len(exename) < 3:
                         response = "Unusually short filename"
                     # Check the extension
-                    if extension != "exe":
+                    if extension.lower() != "exe":
                         # possibly suspicious
                         response = "Possibly suspicious extension"
                     
