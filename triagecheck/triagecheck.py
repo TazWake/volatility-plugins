@@ -138,7 +138,7 @@ class TriageCheck(common.AbstractWindowsCommand):
                     response = "lsass.exe running from unusual location"
 
             # Check for oddly short file length executables - eg. a.exe
-            # first account for system
+            # first, account for system process being the odd one out
             if procname.lower() == "system":
                 holder = "bypass"
                 # Bypass other checks here.                   
@@ -157,7 +157,7 @@ class TriageCheck(common.AbstractWindowsCommand):
                         response = "Possibly suspicious extension"
                     
             # output in "Unified Output format"
-            if holder != "-":
+            if response != "-":
                 yield (0, [
                           int(pid),
                           str(procname),
