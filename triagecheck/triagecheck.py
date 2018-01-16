@@ -57,7 +57,7 @@ class TriageCheck(common.AbstractWindowsCommand):
         csrsscount = 0
         lsasscount = 0
         for task in data:
-            response = "No indicators at this time"
+            response = "-"
             holder = ""
             procname = str(task.ImageFileName)
             pid = int(task.UniqueProcessId)
@@ -152,12 +152,15 @@ class TriageCheck(common.AbstractWindowsCommand):
                         response = "Possibly suspicious extension"
                     
             # output in "Unified Output format"
-            yield (0, [
-                      int(pid),
-                      str(procname),
-                      str(response),
-                      ])
-
+            if holder != "-":
+                yield (0, [
+                          int(pid),
+                          str(procname),
+                          str(response),
+                          ])
+            else:
+                continue
+                
     def unified_output(self,data):
         tree = [
                 ("PID",int),
