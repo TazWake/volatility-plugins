@@ -6,7 +6,7 @@
 # #### !!! LIMITATIONS !!! ####
 # #############################
 #
-# This is not an indepth tool which checks for hollowing, injection etc. 
+# This is not an indepth tool that checks for hollowing, injection etc. 
 # It makes lots of assumptions. It uses pslist.
 # Malware can evade this scan. This checks for LOW HANGING FRUIT. 
 # Do not think a clean scan with this plugin means the 
@@ -108,7 +108,7 @@ class TriageCheck(common.AbstractWindowsCommand):
                 # possible impersonation
                 response = "Posible impersonation of SVCHOST.EXE"
             # Check for DLLHOST impersonation
-            check = ["dllh0st.exe","dllhot.exe","d1lhost.exe","dl1host.exe","d11host.exe","d11h0st.exe"]
+            check = ["dllh0st.exe","dllhot.exe","d1lhost.exe","dl1host.exe","d11host.exe","d11h0st.exe","dIIhost.exe","dIIh0st.exe","dIlhost.exe","dlIhost.exe"]
             if procname.lower() == check:
                 # possible impersonation
                 response = "Posible impersonation of DLLHOST.EXE"
