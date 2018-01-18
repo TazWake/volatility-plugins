@@ -56,22 +56,35 @@ class TriageCheck(common.AbstractWindowsCommand):
     def generator(self, data):
         csrsscount = 0
         lsasscount = 0
+        smsscount = 0
         for task in data:
             response = "-"
             holder = ""
             procname = str(task.ImageFileName)
             pid = int(task.UniqueProcessId)
             
-            # Check csrss for known attacks 
-            # Should only be 1 instance of csrss, running from system32
+            # Check smss for known attacks 
+            # Should only be 1 instance of smss, running from system32
+            check = "smss.exe"
+            if procname == check:
+                smsscount = smsscount+1
+                # Check number of instances
+                if smsscount > 1:
+                    # multiple smss found
+                    response = "Multiple instances of SMSS found"
+                # Check location
+                imgpath = str(task.Peb.ProcessParameters.ImagePathName)
+                path = str("\system32\smss.exe")
+                if path in imgpath.lower():
+                   # valid path
+                   holder = "bypass"
+                else:
+        	    # invalid path
+                    response = "SMSS launched from invalid path"
+
+            # Check csrss is running from system32
             check = "csrss.exe"
             if procname == check:
-            # if task.ImageFilename == "csrss.exe":
-                csrsscount = csrsscount+1
-                # Check number of instances
-                if csrsscount > 1:
-                    # multiple csrss found
-                    response = "Multiple instances of CSRSS found"
                 # Check location
                 imgpath = str(task.Peb.ProcessParameters.ImagePathName)
                 path = str("\system32\csrss.exe")
@@ -80,14 +93,7 @@ class TriageCheck(common.AbstractWindowsCommand):
                    holder = "bypass"
                 else:
         	    # invalid path
-                    response = "CSRSS launched from invalid path"                
-            
-            # Check for CSRSS impersonation
-            check = ["cssrss.exe", "cssrs.exe", "csrss.exe"]
-            if procname == check:
-            # if task.ImageFilename == [cssrss.exe, cssrs.exe, csrss.exe]:
-                # looks suspicious
-                response = "Possible impersonation attempt - CSRSS" 
+                    response = "CSRSS launched from invalid path"         
            
             # Check services.exe is running from system32
             check = "services.exe"
@@ -102,6 +108,12 @@ class TriageCheck(common.AbstractWindowsCommand):
                     response = "Services.exe running from unusual location"
                     
             # Check for impersonation
+            # Check for CSRSS impersonation
+            check = ["cssrss.exe", "cssrs.exe", "csrss.exe"]
+            if procname == check:
+            # if task.ImageFilename == [cssrss.exe, cssrs.exe, csrss.exe]:
+                # looks suspicious
+                response = "Possible impersonation attempt - CSRSS" 
             # Check for SVCHost impersonation
             check = ["scvhost.exe","svch0st.exe","sscvhost.exe","svcchost.exe","scvh0st.exe","svchozt.exe","svchot.exe","scvhot.exe"]
             if procname.lower() == check:
