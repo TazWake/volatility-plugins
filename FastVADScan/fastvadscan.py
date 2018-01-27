@@ -25,6 +25,7 @@ import volatility.utils as utils
 from volatility.renderers import TreeGrid
 from volatility.renderers.basic import Address, Hex
 
+
 class FastVadScan(common.AbstractWindowsCommand):
     '''Quick search for suspicious memory sections'''
 
