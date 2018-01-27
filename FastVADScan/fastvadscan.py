@@ -23,7 +23,6 @@ import volatility.plugins.common as common
 import volatility.win32 as win32
 import volatility.utils as utils
 from volatility.renderers import TreeGrid
-from volatility.renderers.basic import Address, Hex
 
 
 class FastVadScan(common.AbstractWindowsCommand):
