@@ -27,6 +27,7 @@ import volatility.plugins.common as common
 
 from volatility.renderers import TreeGrid
 
+
 class PathCheck(common.AbstractWindowsCommand):
     '''Checks image paths to look for unusual start locations'''
 
@@ -43,51 +44,51 @@ class PathCheck(common.AbstractWindowsCommand):
             temp = "temp"
             tmp = "tmp"
             user = "user"
-            dl ="download"
+            dl = "download"
             if task.Peb:
                 imgPath = str(task.Peb.ProcessParameters.ImagePathName)
             else:
                 imgPath = ""
-                
+
             if temp in imgPath.lower():
                 response = "Possible Temp location"
                 yield (0, [
-                           str(task.UniqueProcessId),
-                           str(task.ImageFileName),
-                           str(response),
-                           str(imgPath),
-                       ])
+                    str(task.UniqueProcessId),
+                    str(task.ImageFileName),
+                    str(response),
+                    str(imgPath),
+                ])
             if tmp in imgPath.lower():
                 response = "Possible Temp location"
                 yield (0, [
-                           str(task.UniqueProcessId),
-                           str(task.ImageFileName),
-                           str(response),
-                           str(imgPath),
-                       ])
+                    str(task.UniqueProcessId),
+                    str(task.ImageFileName),
+                    str(response),
+                    str(imgPath),
+                ])
             if user in imgPath.lower():
                 response = "Possible User location"
                 yield (0, [
-                           str(task.UniqueProcessId),
-                           str(task.ImageFileName),
-                           str(response),
-                           str(imgPath),
-                       ])
+                    str(task.UniqueProcessId),
+                    str(task.ImageFileName),
+                    str(response),
+                    str(imgPath),
+                ])
             if dl in imgPath.lower():
                 response = "Possible Download location"
                 yield (0, [
-                           str(task.UniqueProcessId),
-                           str(task.ImageFileName),
-                           str(response),
-                           str(imgPath),
-                       ])
-                
+                    str(task.UniqueProcessId),
+                    str(task.ImageFileName),
+                    str(response),
+                    str(imgPath),
+                ])
+
     def unified_output(self, data):
         tree = [
-               ("PID", str),
-               ("Process", str),
-               ("Status", str),
-               ("Path", str),
-               ]
+            ("PID", str),
+            ("Process", str),
+            ("Status", str),
+            ("Path", str),
+        ]
 
         return TreeGrid(tree, self.generator(data))
