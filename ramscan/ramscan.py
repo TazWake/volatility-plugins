@@ -1,5 +1,6 @@
 # RAMSCAN
-# A slightly faster version of MALFIND which checks command lines and VAD blocks
+# A slightly faster version of MALFIND which checks
+# command lines and VAD blocks
 #
 # Authors:
 # Taz Wake (t.wake@halkynconsulting.co.uk)
@@ -60,17 +61,17 @@ class RamScan(common.AbstractWindowsCommand):
             yield (0, [
                 str(task.ImageFileName),
                 int(task.UniqueProcessId),
-		int(task.InheritedFromUniqueProcessId), 
+                int(task.InheritedFromUniqueProcessId), 
                 str(cmdline),
                 str(vf),
             ])
 
     def unified_output(self, data):
-	tree = [
-            ("Name", str),
-            ("PID", int),
-            ("Parent", int),
-            ("Command Line", str),
-            ("VAD", str),
+    tree = [
+        ("Name", str),
+        ("PID", int),
+        ("Parent", int),
+        ("Command Line", str),
+        ("VAD", str),
         ]
 	return TreeGrid(tree, self.generator(data))
