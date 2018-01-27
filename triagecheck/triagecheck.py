@@ -79,7 +79,7 @@ class TriageCheck(common.AbstractWindowsCommand):
                     # valid path
                     holder = "bypass"
                 else:
-        	    # invalid path
+                # invalid path
                     response = "SMSS launched from invalid path"
 
             # Check csrss is running from system32
@@ -89,8 +89,8 @@ class TriageCheck(common.AbstractWindowsCommand):
                 imgpath = str(task.Peb.ProcessParameters.ImagePathName)
                 path = str("\system32\csrss.exe")
                 if path in imgpath.lower():
-                   # valid path
-                   holder = "bypass"
+                    # valid path
+                    holder = "bypass"
                 else:
                 # invalid path
                     response = "CSRSS launched from invalid path"
@@ -113,7 +113,7 @@ class TriageCheck(common.AbstractWindowsCommand):
             if procname == check:
             # if task.ImageFilename == [cssrss.exe, cssrs.exe, csrss.exe]:
                 # looks suspicious
-                response = "Possible impersonation attempt - CSRSS" 
+                response = "Possible impersonation attempt - CSRSS"
             # Check for SVCHost impersonation
             check = ["scvhost.exe", "svch0st.exe", "sscvhost.exe", "svcchost.exe", "scvh0st.exe", "svchozt.exe", "svchot.exe", "scvhot.exe"]
             if procname.lower() == check:
@@ -155,12 +155,12 @@ class TriageCheck(common.AbstractWindowsCommand):
                 holder = "bypass"
                 # Bypass other checks here.
             else:
-                # check for data collection issues where procname doesn't contain full file name
+                # check for data collection issues 
+                # where procname doesn't contain full file name
                 if "." not in procname:
-                    holder = "bypass"
-                    # Bypass other checks here.
+                    holder = "bypass"  # Bypass other checks here.
                 else:
-                    exename, extension = procname.split('.') # split off the first portion
+                    exename, extension = procname.split('.')  # split first bit
                     if len(exename) < 3:
                         response = "Unusually short filename"
                     # Check the extension
@@ -178,11 +178,12 @@ class TriageCheck(common.AbstractWindowsCommand):
             else:
                 continue
 
-    def unified_output(self,data):
+    def unified_output(self, data):
         tree = [
-            ("PID",int),
-            ("Filename",str),
-            ("Triage Response",str),
+            ("PID", int),
+            ("Filename", str),
+            ("Triage Response", str),
             ]
 
         return TreeGrid(tree, self.generator(data))
+    
