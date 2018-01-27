@@ -26,7 +26,6 @@
 # along with Volatility.  If not, see <http://www.gnu.org/licenses/>.
 
 import volatility.plugins.common as common
-import volatility.plugins.taskmods as taskmods
 import volatility.utils as utils
 import volatility.win32 as win32
 
