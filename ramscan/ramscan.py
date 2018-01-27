@@ -67,11 +67,12 @@ class RamScan(common.AbstractWindowsCommand):
             ])
 
     def unified_output(self, data):
-    tree = [
-        ("Name", str),
-        ("PID", int),
-        ("Parent", int),
-        ("Command Line", str),
-        ("VAD", str),
+        tree = [
+            ("Name", str),
+            ("PID", int),
+            ("Parent", int),
+            ("Command Line", str),
+            ("VAD", str),
         ]
-	return TreeGrid(tree, self.generator(data))
+
+        return TreeGrid(tree, self.generator(data))
