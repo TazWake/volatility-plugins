@@ -36,13 +36,13 @@ import volatility.win32 as win32
 from volatility.renderers import TreeGrid
 from volatility.renderers.basic import Address, Hex
 
+
 class RamScan(common.AbstractWindowsCommand):
     '''List processes, PID, PPID, Command Line, VAD Status'''
 
     def calculate(self):
         addr_space = utils.load_as(self._config)
         tasks = win32.tasks.pslist(addr_space)
-
         return tasks
 
     def generator(self, data):
@@ -58,21 +58,19 @@ class RamScan(common.AbstractWindowsCommand):
                     if vad.u.VadFlags.Protection.v() == 6:
                         vf = "Suspicious RWX VAD"
             yield (0, [
-		    str(task.ImageFileName),
-		    int(task.UniqueProcessId),
-                    int(task.InheritedFromUniqueProcessId),
-                    str(cmdline),
-                    str(vf),
-
+                str(task.ImageFileName),
+                int(task.UniqueProcessId),
+		int(task.InheritedFromUniqueProcessId), 
+                str(cmdline),
+                str(vf),
             ])
 
     def unified_output(self, data):
 	tree = [
-		("Name", str),
-		("PID", int),
-		("Parent", int),
-                ("Command Line", str),
-                ("VAD", str),
-
-		]
+            ("Name", str),
+            ("PID", int),
+            ("Parent", int),
+            ("Command Line", str),
+            ("VAD", str),
+        ]
 	return TreeGrid(tree, self.generator(data))
