@@ -1,6 +1,11 @@
 # RAMSCAN
 # A slightly faster version of MALFIND which checks
 # command lines and VAD blocks
+# This plugin has been created to help learn volatility plugins
+# and its functionality will change over time.
+# Ramscan extracts process name, PID and parent PID, and command line.
+# Each process VAD is checked and entries with Read/Write/Execute are marked
+# as suspicious
 #
 # Authors:
 # Taz Wake (t.wake@halkynconsulting.co.uk)
@@ -19,15 +24,6 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with Volatility.  If not, see <http://www.gnu.org/licenses/>.
-#
-#
-# This plugin has been created to help learn volatility plugins
-# and its functionality will change over time.
-# Ramscan extracts process name, PID and parent PID, and command line.
-# Each process VAD is checked and entries with Read/Write/Execute are marked
-# as suspicious.
-#
-#
 
 import volatility.plugins.common as common
 import volatility.plugins.taskmods as taskmods
@@ -38,7 +34,7 @@ from volatility.renderers import TreeGrid
 from volatility.renderers.basic import Address, Hex
 
 
-class RamScan(common.AbstractWindowsCommand):
+class RamScan(common.AbstractWindowsCommand): 
     '''List processes, PID, PPID, Command Line, VAD Status'''
 
     def calculate(self):
