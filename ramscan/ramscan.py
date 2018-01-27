@@ -31,7 +31,6 @@ import volatility.utils as utils
 import volatility.win32 as win32
 
 from volatility.renderers import TreeGrid
-from volatility.renderers.basic import Address, Hex
 
 
 class RamScan(common.AbstractWindowsCommand):
