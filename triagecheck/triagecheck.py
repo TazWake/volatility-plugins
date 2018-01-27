@@ -54,7 +54,6 @@ class TriageCheck(common.AbstractWindowsCommand):
         return tasks
 
     def generator(self, data):
-        csrsscount = 0
         lsasscount = 0
         smsscount = 0
         for task in data:
