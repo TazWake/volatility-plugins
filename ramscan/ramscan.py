@@ -34,7 +34,7 @@ from volatility.renderers import TreeGrid
 from volatility.renderers.basic import Address, Hex
 
 
-class RamScan(common.AbstractWindowsCommand): 
+class RamScan(common.AbstractWindowsCommand):
     '''List processes, PID, PPID, Command Line, VAD Status'''
 
     def calculate(self):
@@ -45,7 +45,7 @@ class RamScan(common.AbstractWindowsCommand):
     def generator(self, data):
         cmdline = ""
         vf = ""
-	for task in data:
+    for task in data:
             if task.Peb:
                 cmdline = "{0}".format(str(task.Peb.ProcessParameters.CommandLine or '')).strip()
             process_space = task.get_process_address_space()
@@ -57,7 +57,7 @@ class RamScan(common.AbstractWindowsCommand):
             yield (0, [
                 str(task.ImageFileName),
                 int(task.UniqueProcessId),
-                int(task.InheritedFromUniqueProcessId), 
+                int(task.InheritedFromUniqueProcessId),
                 str(cmdline),
                 str(vf),
             ])
