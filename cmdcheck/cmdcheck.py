@@ -26,6 +26,7 @@ import volatility.utils as utils
 from volatility.renderers import TreeGrid
 from volatility.renderers.basic import Address, Hex
 
+
 class CmdCheck(common.AbstractWindowsCommand):
     '''Checks standard handles for the cmd.exe process'''
 
@@ -60,7 +61,7 @@ class CmdCheck(common.AbstractWindowsCommand):
                 stdinp = "-"
                 stdoutp = "-"
                 stderror = "-"
-                
+
             yield (0, [
                 str(proc.ImageFileName),
                 str(pid),
