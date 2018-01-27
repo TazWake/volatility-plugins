@@ -24,7 +24,6 @@ import volatility.win32 as win32
 import volatility.utils as utils
 
 from volatility.renderers import TreeGrid
-from volatility.renderers.basic import Address, Hex
 
 
 class CmdCheck(common.AbstractWindowsCommand):
