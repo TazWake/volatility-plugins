@@ -37,7 +37,7 @@ class CmdCheck(common.AbstractWindowsCommand):
         return tasks
 
     def generator(self, data):
-        normal = "Normal behaviour is 0x3L 0x7L 0xbL"
+        # Normal behaviour for cmd.exe is 0x3L 0x7L 0xbL
         pid = ""
         stdinp = ""
         stdoutp = ""
