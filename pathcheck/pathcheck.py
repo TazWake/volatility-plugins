@@ -38,13 +38,14 @@ class PathCheck(common.AbstractWindowsCommand):
         return tasks
 
     def generator(self, data):
+        """Checks image paths to look for unusual start locations"""
 
         for task in data:
             response = ""
             temp = "temp"
             tmp = "tmp"
             user = "user"
-            dl = "download"
+            down = "download"
             if task.Peb:
                 imgpath = str(task.Peb.ProcessParameters.ImagePathName)
             else:
@@ -74,7 +75,7 @@ class PathCheck(common.AbstractWindowsCommand):
                     str(response),
                     str(imgpath),
                 ])
-            if dl in imgpath.lower():
+            if down in imgpath.lower():
                 response = "Possible Download location"
                 yield (0, [
                     str(task.UniqueProcessId),
