@@ -56,7 +56,7 @@ class PathCheck(common.AbstractWindowsCommand):
                     str(task.UniqueProcessId),
                     str(task.ImageFileName),
                     str(response),
-                    str(imgPath),
+                    str(imgpath),
                 ])
             if tmp in imgpath.lower():
                 response = "Possible Temp location"
@@ -64,7 +64,7 @@ class PathCheck(common.AbstractWindowsCommand):
                     str(task.UniqueProcessId),
                     str(task.ImageFileName),
                     str(response),
-                    str(imgPath),
+                    str(imgpath),
                 ])
             if user in imgpath.lower():
                 response = "Possible User location"
@@ -72,7 +72,7 @@ class PathCheck(common.AbstractWindowsCommand):
                     str(task.UniqueProcessId),
                     str(task.ImageFileName),
                     str(response),
-                    str(imgPath),
+                    str(imgpath),
                 ])
             if dl in imgpath.lower():
                 response = "Possible Download location"
@@ -80,7 +80,7 @@ class PathCheck(common.AbstractWindowsCommand):
                     str(task.UniqueProcessId),
                     str(task.ImageFileName),
                     str(response),
-                    str(imgPath),
+                    str(imgpath),
                 ])
 
     def unified_output(self, data):
