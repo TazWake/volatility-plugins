@@ -31,7 +31,6 @@ import volatility.win32 as win32
 
 from volatility.renderers import TreeGrid
 
-
 class RamScan(common.AbstractWindowsCommand):
     '''List processes, PID, PPID, Command Line, VAD Status'''
 
