@@ -42,22 +42,22 @@ class RamScan(common.AbstractWindowsCommand):
     def generator(self, data):
         cmdline = ""
         vf = ""
-    for task in data:
-        if task.Peb:
-            cmdline = "{0}".format(str(task.Peb.ProcessParameters.CommandLine or '')).strip()
-        process_space = task.get_process_address_space()
-        for vad in task.VadRoot.traverse():
-           data = process_space.read(vad.Start, 1024)
-           if vad.u.VadFlags.CommitCharge.v() > 30:
-               if vad.u.VadFlags.Protection.v() == 6:
-                   vf = "Suspicious RWX VAD"
-        yield (0, [
-            str(task.ImageFileName),
-            int(task.UniqueProcessId),
-            int(task.InheritedFromUniqueProcessId),
-            str(cmdline),
-            str(vf),
-        ])
+        for task in data:
+            if task.Peb:
+                cmdline = "{0}".format(str(task.Peb.ProcessParameters.CommandLine or '')).strip()
+            process_space = task.get_process_address_space()
+            for vad in task.VadRoot.traverse():
+                data = process_space.read(vad.Start, 1024)
+                if vad.u.VadFlags.CommitCharge.v() > 30:
+                    if vad.u.VadFlags.Protection.v() == 6:
+                        vf = "Suspicious RWX VAD"
+            yield (0, [
+                str(task.ImageFileName),
+                int(task.UniqueProcessId),
+                int(task.InheritedFromUniqueProcessId),
+                str(cmdline),
+                str(vf),
+            ])
 
     def unified_output(self, data):
         tree = [
