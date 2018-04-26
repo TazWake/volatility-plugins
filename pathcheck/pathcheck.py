@@ -1,7 +1,6 @@
 # Path Check
 # A basic triage tool to check if any processes are running from unusual
 # or suspicious locations such as TEMP folders.
-#
 # Authors:
 # Taz Wake (t.wake@halkynconsulting.co.uk)
 #
@@ -26,7 +25,6 @@ import volatility.utils as utils
 import volatility.plugins.common as common
 
 from volatility.renderers import TreeGrid
-
 
 class PathCheck(common.AbstractWindowsCommand):
     '''Checks image paths to look for unusual start locations'''
