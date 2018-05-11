@@ -27,7 +27,7 @@ from volatility.renderers import TreeGrid
 
 
 class CmdCheck(common.AbstractWindowsCommand):
-    '''Checks standard handles for the cmd.exe process'''
+    '''Checks the handles on any running cmd.exe processes'''
 
     def calculate(self):
         addr_space = utils.load_as(self._config)
