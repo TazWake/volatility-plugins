@@ -45,7 +45,7 @@ from volatility.renderers import TreeGrid
 
 
 class TriageCheck(common.AbstractWindowsCommand):
-    '''Checks for OBVIOUS signs of tampering - please not limitations'''
+    '''Checks for OBVIOUS signs of tampering - please note limitations'''
 
     def calculate(self):
         addr_space = utils.load_as(self._config)
