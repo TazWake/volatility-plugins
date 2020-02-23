@@ -1,7 +1,6 @@
 # Triage Check
-
+#
 # This plugin highlights obvious signs of malicious activity.
-
 # #############################
 # #### !!! LIMITATIONS !!! ####
 # #############################
